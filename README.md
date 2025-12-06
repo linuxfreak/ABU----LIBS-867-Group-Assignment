@@ -1,5 +1,7 @@
-# AHMADU BELLO UNIVERSITY DISTANCE LEARNING CENTRE
-# MASTERS IN INFORMATION MANAGEMENT (MIM)
+<h1 style="text-align: center;">AHMADU BELLO UNIVERSITY DISTANCE LEARNING CENTRE</h1>
+
+<h1 style="text-align: center;">MASTERS IN INFORMATION MANAGEMENT (MIM)</h1>
+
 
 | **Project Title**   | Library Management System (Group Assignment)                                                                                                                                                                                                                                                                                                                                         |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -10,6 +12,7 @@
 | **Submission Date** | 05/12/2025                                                                                                                                                                                                                                                                                                                                                                           |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Executive Summary
 
@@ -19,31 +22,22 @@ The database schema encompasses 17 interconnected tables supporting core functio
 
 The database for this course is hosting on a cloud MySQL instance and can be access for validation using the following credentials:
 
-	- Host: `furthermore-mysql-furthermore.f.aivencloud.com`
-	- User: `group_four`
-	- ⁠⁠Password: `Driver-Rear-Score7`
-	- Port: `20426`
-	- Item⁠SSL Mode: `REQUIRED`
+	- Host: furthermore-mysql-furthermore.f.aivencloud.com
+	- User: group_four
+	- ⁠⁠Password: Driver-Rear-Score7
+	- Port: 20426
+	- Item⁠SSL Mode: REQUIRED
 
 NOTE: *This database instance will only be available for the lifespan of the course and will be taken down immediately afterwards*
 
----
+The complete SQL script required to rebuild the database and the source file for this documentation has been committed a public github report and can be accessed here:
 
-## Table of Contents
-
-1. [System Overview](#1-system-overview)
-2. [Business Requirements & Use Cases](#2-business-requirements--use-cases)
-3. [Database Architecture](#3-database-architecture)
-4. [Entity Relationship Model](#4-entity-relationship-model)
-5. [Schema Design & Implementation](#5-schema-design--implementation)
-6. [Constraints & Validation Rules](#6-constraints--validation-rules)
-7. [Design Decisions & Rationale](#7-design-decisions--rationale)
-8. [Query Optimization Strategy](#8-query-optimization-strategy)
-9. [Sample Data & Testing](#9-sample-data--testing)
-10. [Future Enhancements](#10-future-enhancements)
-11. [Conclusion](#11-conclusion)
+```
+https://github.com/linuxfreak/ABU----LIBS-867-Group-Assignment.git
+```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 1. System Overview
 
@@ -75,6 +69,7 @@ The system is optimised for Nigerian library networks with considerations for:
 - Local geographic hierarchy (State-based addressing)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 2. Business Requirements & Use Cases
 
@@ -172,6 +167,7 @@ The system is optimised for Nigerian library networks with considerations for:
 **Postcondition**: Book available for circulation, inventory updated
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 3. Database Architecture
 
@@ -184,39 +180,7 @@ The system implements a **normalized relational database** following Third Norma
 - **Lookup tables**: Enumerated values and fee structures (payment_type, fine_policy)
 - **Transaction tables**: Business operations (loan, payment)
 - **Audit capabilities**: Created_at and updated_at timestamps across all tables
-
-### 3.2 Database Structure Overview (with demo data)
-
-```
-library_index_system/
-│
-├── Catalog Management
-│   ├── publisher (15 records)
-│   ├── author (20 records)
-│   ├── book (40 records)
-│   ├── subject (25 records)
-│   ├── book_author (junction - 31 records)
-│   └── book_subject (junction - 80 records)
-│
-├── Inventory Management
-│   ├── branch (13 records)
-│   └── book_copy (68 records)
-│
-├── Circulation Management
-│   ├── member (30 records)
-│   └── loan (34 records)
-│
-└── Financial Management
-    ├── payment_type (7 records)
-    ├── membership_fee_structure (6 records)
-    ├── fine_policy (6 records)
-    ├── payment (core payment table)
-    ├── membership_payment (links to payments)
-    ├── fine_payment (links to payments)
-    └── payment_receipt (receipt generation)
-```
-
-### 3.3 Table Dependencies
+### 3.2 Table Dependencies
 
 **Tier 1 (No Dependencies)**:
 - publisher
@@ -246,6 +210,7 @@ library_index_system/
 - payment_receipt → payment
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 4. Entity Relationship Model
 
@@ -333,6 +298,7 @@ library_index_system/
 | Subject-Subject | Subject | Subject | 1:N | Self-referencing |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 5. Schema Design & Implementation
 
@@ -770,6 +736,7 @@ CREATE TABLE fine_payment (
 - Audit trail via waived_by and waiver_reason
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 6. Constraints & Validation Rules
 
@@ -914,6 +881,7 @@ Strategic defaults improve data consistency:
 - `fine_amount = 0.00` (no fine initially)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 7. Design Decisions & Rationale
 
@@ -1076,6 +1044,7 @@ ENUM('Cash', 'Credit Card', 'Debit Card', 'Mobile Money', 'Bank Transfer', 'Cheq
 **Mobile Money** inclusion reflects prevalent Nigerian payment ecosystem (e.g., Paga, OPay).
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 8. Query Optimization Strategy
 
@@ -1207,25 +1176,26 @@ LIMIT 20;
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 9. Sample Data & Testing
 
 ### 9.1 Data Population Summary
 
-The database contains representative sample data reflecting a functional Nigerian library network:
+The database contains representative sample data reflecting a functional Nigerian library network. We started by seeding dummy data using the 'Dummy Data' service on: https://filldb.info/dummy/ and then refined the outputs until it was relevant enough for our purpose.
 
-| Table | Record Count | Coverage |
-|-------|--------------|----------|
-| publisher | 15 | Mix of international (Penguin, Oxford) and Nigerian publishers (Cassava Republic, Farafina) |
-| author | 20 | Nigerian literary giants (Achebe, Soyinka, Adichie) plus contemporary authors |
-| book | 40 | Nigerian/African literature, academic texts, history |
-| subject | 25 | Hierarchical taxonomy including Nigerian literature sub-classifications |
-| branch | 13 | Major Nigerian cities (Lagos, Abuja, Kano, Port Harcourt, Ibadan) |
-| book_copy | 68 | Distributed inventory across branches |
-| member | 30 | Diverse membership types and locations |
-| loan | 34 | Mix of active, returned, and overdue loans |
-| payment_type | 7 | Standard fee categories |
-| fine_policy | 6 | Tiered policies by membership type |
+| Table        | Record Count | Coverage                                                                                    |
+| ------------ | ------------ | ------------------------------------------------------------------------------------------- |
+| publisher    | 15           | Mix of international (Penguin, Oxford) and Nigerian publishers (Cassava Republic, Farafina) |
+| author       | 20           | Nigerian literary giants (Achebe, Soyinka, Adichie) plus contemporary authors               |
+| book         | 40           | Nigerian/African literature, academic texts, history                                        |
+| subject      | 25           | Hierarchical taxonomy including Nigerian literature sub-classifications                     |
+| branch       | 13           | Major Nigerian cities (Lagos, Abuja, Kano, Port Harcourt, Ibadan)                           |
+| book_copy    | 68           | Distributed inventory across branches                                                       |
+| member       | 30           | Diverse membership types and locations                                                      |
+| loan         | 34           | Mix of active, returned, and overdue loans                                                  |
+| payment_type | 7            | Standard fee categories                                                                     |
+| fine_policy  | 6            | Tiered policies by membership type                                                          |
 
 ### 9.2 Test Scenarios
 
@@ -1326,6 +1296,7 @@ VALUES (1, 1, 1, '2024-11-20', '2024-11-15');
 - Archive old loans to maintain performance
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 10. Future Enhancements
 
@@ -1365,6 +1336,7 @@ VALUES (1, 1, 1, '2024-11-20', '2024-11-15');
 **Objective**: Allow members to curate personal reading lists.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## 11. Conclusion
 
@@ -1431,13 +1403,11 @@ This library index system successfully addresses the core requirements of multi-
 - Soft deletion crucial for financial and historical record preservation
 
 **Nigerian Context**:
-- Local payment methods (Mobile Money) critical for adoption
 - Phone number field sizing must accommodate international formats
 - State-based addressing more relevant than postal codes
 - Membership tiers should reflect educational system structure
 
 **MySQL Specifics**:
-- InnoDB foreign keys provide integrity but limit flexibility (can't disable temporarily)
 - DECIMAL for financial data is non-negotiable (avoid FLOAT/DOUBLE)
 - FULLTEXT indexes powerful but require careful analyzer selection
 - AUTO_INCREMENT safe for distributed systems with proper configuration
@@ -1457,6 +1427,17 @@ Future work should prioritize:
 The system successfully demonstrates how thoughtful database design bridges business requirements, technical constraints, and cultural context to create meaningful, maintainable information systems.
 
 ---
+<div style="page-break-after: always;"></div>
+
+## References
+
+1. MySQL Documentation: https://dev.mysql.com/doc/
+2. Wikipedia: ISBN Format: https://en.wikipedia.org/wiki/ISBN
+3. Database Third Norma Form (Normalisation): https://en.wikipedia.org/wiki/Third_normal_form
+4. 
+
+---
+<div style="page-break-after: always;"></div>
 
 ## Appendix A: Table Relationships Matrix
 
